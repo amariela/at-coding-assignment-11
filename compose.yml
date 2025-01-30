@@ -1,0 +1,14 @@
+# define container / service
+services: 
+  web:
+    build: . # build Dockerfile in current directory 
+    ports:
+      - "7775:80" # Maps port 80 on the container to port 7775 on the host
+    volumes: # Mounts current directory and node_modules for hot-reloading
+     - .:/app
+     - ./node_modules:/app/node_modules
+    environment:
+      NODE_ENV: development
+    stdin_open: true # keep container running
+    tty: true # keep container interactive
+    command: npm start
